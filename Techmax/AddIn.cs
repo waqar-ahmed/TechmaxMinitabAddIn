@@ -27,6 +27,17 @@ namespace Techmax
 
     public class AddIn : IMinitabAddin
     {
+        public AddIn() 
+        {
+            // Reference embedded dll
+            // Link: https://www.codeproject.com/Articles/528178/Load-DLL-From-Embedded-Resource
+            string resource1 = "Techmax.OxyPlot.dll";  // Pattern : ProjectName + complete dll name
+            string resource2 = "Techmax.OxyPlot.WindowsForms.dll";
+
+            EmbeddedAssembly.Load(resource1, "OxyPlot.dll");
+            EmbeddedAssembly.Load(resource2, "OxyPlot.WindowsForms.dll");    
+        }
+
         internal static Mtb.Application gMtbApp;
 
         [method: DllExportAttribute("DllRegisterServer", CallingConvention = CallingConvention.StdCall)]
@@ -102,10 +113,6 @@ namespace Techmax
             return 0;
         }
 
-        public AddIn()
-        {
-        }
-
         ~AddIn()
         {
         }
@@ -161,13 +168,14 @@ namespace Techmax
             // You can return "|" to create a menu separator in your menu items.
             sMainMenu = "&Techmax Menu";  // This string is the name of the menu.
 
-            saMenuItems = new String[5];  // The strings in this array are the names of the items on the aforementioned menu.
+            saMenuItems = new String[6];  // The strings in this array are the names of the items on the aforementioned menu.
 
             saMenuItems.SetValue("Describe &column(s)…", 0);
             saMenuItems.SetValue("Rename active &worksheet…", 1);
             saMenuItems.SetValue("|", 2);
             saMenuItems.SetValue("&DOS window", 3);
             saMenuItems.SetValue("&Geometric Mean and Mean Absolute Difference…", 4);
+            saMenuItems.SetValue("&Bland Altman Plot", 5);
 
             // Flags is not currently used:
             iFlags = 0;
@@ -334,6 +342,19 @@ namespace Techmax
                             AddIn.gMtbApp.ActiveProject.ExecuteCommand("NOTE ** Error ** Cannot compute statistics…");
                         }
                         formGeoMean.Close();
+                    }
+                    break;
+                case 5:
+                    try
+                    {
+                        BAPlot baPlot = new BAPlot(ref AddIn.gMtbApp);
+                        dialogResult = baPlot.ShowDialog();
+                        if (dialogResult == DialogResult.OK)
+                        { }
+                        baPlot.Close();
+                    }
+                    catch (Exception e) {
+                        MessageBox.Show(e.Message, "Error");
                     }
                     break;
                 default:

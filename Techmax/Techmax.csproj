@@ -51,6 +51,14 @@
     <Win32Resource>C:\Users\waqar\Documents\Visual Studio 2013\Projects\Techmax\Techmax\bin\x86\Debug\Techmax.res</Win32Resource>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="RGiesecke.DllExport.Metadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8f52d83c1a22df51, processorArchitecture=MSIL">
       <HintPath>..\packages\UnmanagedExports.1.2.7\lib\net\RGiesecke.DllExport.Metadata.dll</HintPath>
       <Private>False</Private>
@@ -67,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddIn.cs" />
+    <Compile Include="EmbeddedAssembly.cs" />
     <Compile Include="FormDescribe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +87,12 @@
     </Compile>
     <Compile Include="FormGeoMean.designer.cs">
       <DependentUpon>FormGeoMean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BAPlot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BAPlot.designer.cs">
+      <DependentUpon>BAPlot.cs</DependentUpon>
     </Compile>
     <Compile Include="FormRename.cs">
       <SubType>Form</SubType>
@@ -117,9 +132,16 @@
     <EmbeddedResource Include="FormGeoMean.resx">
       <DependentUpon>FormGeoMean.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BAPlot.resx">
+      <DependentUpon>BAPlot.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormRename.resx">
       <DependentUpon>FormRename.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OxyPlot.dll" />
+    <EmbeddedResource Include="OxyPlot.WindowsForms.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="../packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets" Condition="Exists('../packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets')" />
