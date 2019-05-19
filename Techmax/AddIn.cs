@@ -31,11 +31,15 @@ namespace Techmax
         {
             // Reference embedded dll
             // Link: https://www.codeproject.com/Articles/528178/Load-DLL-From-Embedded-Resource
+            /*
             string resource1 = "Techmax.OxyPlot.dll";  // Pattern : ProjectName + complete dll name
             string resource2 = "Techmax.OxyPlot.WindowsForms.dll";
 
+            EmbeddedAssembly.Load("Techmax.Python.Runtime.dll", "Python.Runtime.dll");
+            EmbeddedAssembly.Load(resource2, "OxyPlot.WindowsForms.dll");
             EmbeddedAssembly.Load(resource1, "OxyPlot.dll");
-            EmbeddedAssembly.Load(resource2, "OxyPlot.WindowsForms.dll");    
+            */
+            //EmbeddedAssembly.Load("Techmax.ZedGraph.dll", "ZedGraph.dll");
         }
 
         internal static Mtb.Application gMtbApp;
